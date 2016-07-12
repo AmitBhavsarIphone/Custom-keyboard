@@ -27,7 +27,7 @@ class HostingAppViewController: UIViewController {
     
     @IBAction func dismiss() {
         for view in self.view.subviews {
-            if var inputView = view as? UITextField {
+            if let inputView = view as? UITextField {
                 inputView.resignFirstResponder()
             }
         }

@@ -30,7 +30,7 @@ class CatboardBanner: ExtraView {
         self.updateAppearance()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -52,44 +52,44 @@ class CatboardBanner: ExtraView {
 
 		isAllowFullAccess = isOpenAccessGranted()
 		
-		btn1 = UIButton.buttonWithType(.Custom) as! UIButton
+		btn1 = UIButton(type: .Custom)
 		btn1.exclusiveTouch = true
 		btn1.titleLabel!.minimumScaleFactor = 0.6
 		btn1 .setTitle("The", forState: UIControlState.Normal)
 		btn1.backgroundColor = UIColor(red:0.68, green:0.71, blue:0.74, alpha:1)
 		btn1.titleLabel?.font = UIFont.systemFontOfSize(18)
 		btn1.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-		btn1.setTranslatesAutoresizingMaskIntoConstraints(false)
+		btn1.translatesAutoresizingMaskIntoConstraints = false
         btn1.titleLabel!.adjustsFontSizeToFitWidth = true
 		
-		btn2 = UIButton.buttonWithType(.Custom) as! UIButton
+		btn2 = UIButton(type: .Custom)
 		btn2.exclusiveTouch = true
 		btn2.titleLabel!.minimumScaleFactor = 0.6
 		btn2 .setTitle("I", forState: UIControlState.Normal)
 		btn2.backgroundColor = UIColor(red:0.68, green:0.71, blue:0.74, alpha:1)
 		btn2.titleLabel?.font = UIFont.systemFontOfSize(18)
 		btn2.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-		btn2.setTranslatesAutoresizingMaskIntoConstraints(false)
+		btn2.translatesAutoresizingMaskIntoConstraints = false
         btn2.titleLabel!.adjustsFontSizeToFitWidth = true
 		
-		btn3 = UIButton.buttonWithType(.Custom) as! UIButton
+		btn3 = UIButton(type: .Custom)
 		btn3.exclusiveTouch = true
 		btn3.titleLabel!.minimumScaleFactor = 0.6
 		btn3 .setTitle("What", forState: UIControlState.Normal)
 		btn3.backgroundColor = UIColor(red:0.68, green:0.71, blue:0.74, alpha:1)
 		btn3.titleLabel?.font = UIFont.systemFontOfSize(18)
 		btn3.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-		btn3.setTranslatesAutoresizingMaskIntoConstraints(false)
+		btn3.translatesAutoresizingMaskIntoConstraints = false
         btn3.titleLabel!.adjustsFontSizeToFitWidth = true
         
-        btn4 = UIButton.buttonWithType(.Custom) as! UIButton
+        btn4 = UIButton(type: .Custom)
         btn4.exclusiveTouch = true
         btn4.titleLabel!.minimumScaleFactor = 0.6
         btn4 .setTitle("Enable Allow Full Access", forState: UIControlState.Normal)
         btn4.backgroundColor = UIColor(red:0.68, green:0.71, blue:0.74, alpha:1)
         btn4.titleLabel?.font = UIFont.systemFontOfSize(18)
         btn4.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        btn4.setTranslatesAutoresizingMaskIntoConstraints(false)
+        btn4.translatesAutoresizingMaskIntoConstraints = false
         btn4.titleLabel!.adjustsFontSizeToFitWidth = true
 
         if(isAllowFullAccess == true)
@@ -157,11 +157,11 @@ class CatboardBanner: ExtraView {
         {
             var buttons = [btn1,btn2,btn3]
             
-            for (index, button) in enumerate([btn1,btn2,btn3]) {
+            for (index, button) in [btn1,btn2,btn3].enumerate() {
                 
-                var topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 0)
+                let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 0)
                 
-                var bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1.0, constant: 0)
+                let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1.0, constant: 0)
                 
                 var rightConstraint : NSLayoutConstraint!
                 
@@ -184,7 +184,7 @@ class CatboardBanner: ExtraView {
                     leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: prevtButton, attribute: .Right, multiplier: 1.0, constant: 1)
                     
                     let firstButton = buttons[0]
-                    var widthConstraint = NSLayoutConstraint(item: firstButton, attribute: .Width, relatedBy: .Equal, toItem: button, attribute: .Width, multiplier: 1.0, constant: 1)
+                    let widthConstraint = NSLayoutConstraint(item: firstButton, attribute: .Width, relatedBy: .Equal, toItem: button, attribute: .Width, multiplier: 1.0, constant: 1)
                     
                     widthConstraint.priority = 800
                     self.addConstraint(widthConstraint)
@@ -197,13 +197,13 @@ class CatboardBanner: ExtraView {
         }
         else
         {
-            var buttons = [btn4]
+            let buttons = [btn4]
             
-            for (index, button) in enumerate(buttons) {
+            for (index, button) in buttons.enumerate() {
                 
-                var topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 0)
+                let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 0)
                 
-                var bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1.0, constant: 0)
+                let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1.0, constant: 0)
                 
                 var rightConstraint : NSLayoutConstraint!
                 
@@ -251,17 +251,17 @@ class CatboardBanner: ExtraView {
 
 	}
 
-	override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
+	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
 	{
 		if self.frame.size.height == 30
 		{
 			for obj in touches
 			{
-				let touch = obj as! UITouch
+				let touch = obj 
 				let position = touch.locationInView(self)
-				var view = findNearestView(position)
+				let view = findNearestView(position)
 				
-				var viewChangedOwnership = self.ownView(touch, viewToOwn: view)
+				let viewChangedOwnership = self.ownView(touch, viewToOwn: view)
 				if !viewChangedOwnership {
 					self.handleControl(view, controlEvent: .TouchDown)
 					
@@ -274,23 +274,23 @@ class CatboardBanner: ExtraView {
 		}
 	}
 	
-	override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent)
+	override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?)
 	{
 		if self.frame.size.height == 30
 		{
 			for obj in touches
 			{
-				let touch = obj as! UITouch
+				let touch = obj 
 				let position = touch.locationInView(self)
 				
-				var oldView = self.touchToView[touch]
-				var newView = findNearestView(position)
+				let oldView = self.touchToView[touch]
+				let newView = findNearestView(position)
 				
 				if oldView != newView
 				{
 					self.handleControl(oldView, controlEvent: .TouchDragExit)
 					
-					var viewChangedOwnership = self.ownView(touch, viewToOwn: newView)
+					let viewChangedOwnership = self.ownView(touch, viewToOwn: newView)
 					
 					if !viewChangedOwnership
 					{
@@ -312,15 +312,15 @@ class CatboardBanner: ExtraView {
 		
 	}
 	
-	override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent)
+	override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?)
 	{
 		if self.frame.size.height == 30
 		{
 			for obj in touches
 			{
-				let touch = obj as! UITouch
+				let touch = obj 
 				
-				var view = self.touchToView[touch]
+				let view = self.touchToView[touch]
 				
 				let touchPosition = touch.locationInView(self)
 				
@@ -340,7 +340,7 @@ class CatboardBanner: ExtraView {
 		
 	}
 	
-	override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!)
+	override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?)
 	{
 		if self.frame.size.height == 30
 		{
@@ -367,7 +367,7 @@ class CatboardBanner: ExtraView {
 		var closest: (UIView, CGFloat)? = nil
 		
 		for anyView in self.subviews {
-			let view = anyView as! UIView
+			let view = anyView 
 			
 			if view.hidden {
 				continue
@@ -446,10 +446,10 @@ class CatboardBanner: ExtraView {
 		if let control = view as? UIControl {
 			let targets = control.allTargets()
 			for target in targets { // TODO: Xcode crashes
-				var actions = control.actionsForTarget(target, forControlEvent: controlEvent)
+				let actions = control.actionsForTarget(target, forControlEvent: controlEvent)
 				if (actions != nil) {
 					for action in actions! {
-						let selector = Selector(action as! String)
+						let selector = Selector(action )
 						
 						control.sendAction(selector, to: target, forEvent: nil)
 					}
