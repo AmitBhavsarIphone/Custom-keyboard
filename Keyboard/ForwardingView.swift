@@ -429,10 +429,11 @@ class ForwardingView: UIView,UIGestureRecognizerDelegate {
 	}
 
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        guard let touches = touches else { return }
         for obj in touches {
             if let touch = obj as? UITouch {
                 var view = self.touchToView[touch]
-                
+
                 self.handleControl(view, controlEvent: .TouchCancel)
                 
                 self.touchToView[touch] = nil

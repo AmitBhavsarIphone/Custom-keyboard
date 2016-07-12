@@ -176,7 +176,7 @@ func drawBackspace(bounds: CGRect, color: UIColor) {
     let yScalingFactor = factors.yScalingFactor
     let lineWidthScalingFactor = factors.lineWidthScalingFactor
     
-    centerShape(CGSizeMake(44 * xScalingFactor, 32 * yScalingFactor), bounds)
+    centerShape(CGSizeMake(44 * xScalingFactor, 32 * yScalingFactor), toRect: bounds)
     
     
     //// Color Declarations
@@ -232,7 +232,7 @@ func drawShift(bounds: CGRect, color: UIColor, withRect: Bool) {
     let yScalingFactor = factors.yScalingFactor
     let lineWidthScalingFactor = factors.lineWidthScalingFactor
     
-    centerShape(CGSizeMake(38 * xScalingFactor, (withRect ? 34 + 4 : 32) * yScalingFactor), bounds)
+    centerShape(CGSizeMake(38 * xScalingFactor, (withRect ? 34 + 4 : 32) * yScalingFactor), toRect: bounds)
     
     
     //// Color Declarations
@@ -273,7 +273,7 @@ func drawGlobe(bounds: CGRect, color: UIColor) {
     let yScalingFactor = factors.yScalingFactor
     let lineWidthScalingFactor = factors.lineWidthScalingFactor
     
-    centerShape(CGSizeMake(41 * xScalingFactor, 40 * yScalingFactor), bounds)
+    centerShape(CGSizeMake(41 * xScalingFactor, 40 * yScalingFactor), toRect: bounds)
     
     
     //// Color Declarations

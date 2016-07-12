@@ -342,6 +342,8 @@ class CatboardBanner: ExtraView {
 	
 	override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?)
 	{
+        guard let touches = touches else { return }
+
 		if self.frame.size.height == 30
 		{
 			for obj in touches
