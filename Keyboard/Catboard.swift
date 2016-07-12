@@ -24,12 +24,11 @@ class Catboard: KeyboardViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
-    required init(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func keyPressed(key: Key) {
-        if let textDocumentProxy = self.textDocumentProxy as? UITextDocumentProxy {
             let keyOutput = key.outputForCase(self.shiftState.uppercase())
             
             if !NSUserDefaults.standardUserDefaults().boolForKey(kCatTypeEnabled) {
@@ -40,7 +39,7 @@ class Catboard: KeyboardViewController {
             if key.type == .Character || key.type == .SpecialCharacter {
                 let context = textDocumentProxy.documentContextBeforeInput
                 if context != nil {
-                    if count(context) < 2 {
+                    if context!.characters.count < 2 {
                         textDocumentProxy.insertText(keyOutput)
                         return
                     }
@@ -48,13 +47,13 @@ class Catboard: KeyboardViewController {
                     var index = context!.endIndex
                     
                     index = index.predecessor()
-                    if context[index] != " " {
+                    if context![index] != " " {
                         textDocumentProxy.insertText(keyOutput)
                         return
                     }
                     
                     index = index.predecessor()
-                    if context[index] == " " {
+                    if context![index] == " " {
                         textDocumentProxy.insertText(keyOutput)
                         return
                     }
@@ -73,7 +72,7 @@ class Catboard: KeyboardViewController {
                 textDocumentProxy.insertText(keyOutput)
                 return
             }
-        }
+
     }
     
     override func setupKeys() {
@@ -88,7 +87,7 @@ class Catboard: KeyboardViewController {
                 for rowKeys in page.rows {
                     for key in rowKeys {
                         if let keyView = self.layout!.viewForKey(key) {
-                            keyView.addTarget(self, action: "takeScreenshotDelay", forControlEvents: .TouchDown)
+                            keyView.addTarget(self, action: #selector(Catboard.takeScreenshotDelay), forControlEvents: .TouchDown)
                         }
                     }
                 }
@@ -101,7 +100,7 @@ class Catboard: KeyboardViewController {
     }
     
     func takeScreenshotDelay() {
-        var timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: Selector("takeScreenshot"), userInfo: nil, repeats: false)
+        _ = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(Catboard.takeScreenshot), userInfo: nil, repeats: false)
     }
     
     func takeScreenshot() {
@@ -111,15 +110,15 @@ class Catboard: KeyboardViewController {
             let oldViewColor = self.view.backgroundColor
             self.view.backgroundColor = UIColor(hue: (216/360.0), saturation: 0.05, brightness: 0.86, alpha: 1)
             
-            var rect = self.view.bounds
+            let rect = self.view.bounds
             UIGraphicsBeginImageContextWithOptions(rect.size, true, 0)
-            var context = UIGraphicsGetCurrentContext()
+            _ = UIGraphicsGetCurrentContext()
             self.view.drawViewHierarchyInRect(self.view.bounds, afterScreenUpdates: true)
-            var capturedImage = UIGraphicsGetImageFromCurrentImageContext()
+            let capturedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-            let name = (self.interfaceOrientation.isPortrait ? "Screenshot-Portrait" : "Screenshot-Landscape")
-            var imagePath = "/Users/archagon/Documents/Programming/OSX/RussianPhoneticKeyboard/External/tasty-imitation-keyboard/\(name).png"
-            UIImagePNGRepresentation(capturedImage).writeToFile(imagePath, atomically: true)
+            let name = (self.view.bounds.width < self.view.bounds.height ? "Screenshot-Portrait" : "Screenshot-Landscape")
+            let imagePath = "/Users/archagon/Documents/Programming/OSX/RussianPhoneticKeyboard/External/tasty-imitation-keyboard/\(name).png"
+                UIImagePNGRepresentation(capturedImage)?.writeToFile(imagePath, atomically: true)
             
             self.view.backgroundColor = oldViewColor
         }
@@ -129,10 +128,10 @@ class Catboard: KeyboardViewController {
 func randomCat() -> String {
     let cats = "🐱😺😸😹😽😻😿😾😼🙀"
     
-    let numCats = count(cats)
+    let numCats = cats.characters.count
     let randomCat = arc4random() % UInt32(numCats)
     
-    let index = advance(cats.startIndex, Int(randomCat))
+    let index = cats.startIndex.advancedBy(Int(randomCat))
     let character = cats[index]
     
     return String(character)

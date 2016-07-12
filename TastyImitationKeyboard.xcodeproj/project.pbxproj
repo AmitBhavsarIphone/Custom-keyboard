@@ -419,6 +419,7 @@
 		4E807D8B19461D9000D875D1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0730;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
